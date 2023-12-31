@@ -95,7 +95,21 @@ module.exports.deleteProduct=(async(req,res)=>{
     res.status(500).json(err);
   }
 })
-
+module.exports.deleteUser=(async(req,res)=>{
+  try{
+    console.log(req.params.id);
+    const currentUser= await User.findByPk(req.params.id)
+    if(!currentUser){
+      return res.status(404).json('user not found')
+    }
+    await currentUser.destroy()
+    console.log(currentUser)
+    res.json('user deleted successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+})
 
 
 

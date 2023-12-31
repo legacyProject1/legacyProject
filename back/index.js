@@ -24,7 +24,7 @@ app.use(cors());
 app.use("/cart", cartRoute);
 
 app.use("/auth", translateRouteAuth);
-// app.use("/admin", translateRouteAdmin);
+app.use("/admin", translateRouteAdmin);
 
 app.use("/client", ClientRoute);
 app.use("/seller", SellerRoute);
