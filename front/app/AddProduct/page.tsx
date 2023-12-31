@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import SellerNavbar from '../SellerNavbar/page';
+import SellerFooter from '../SellerFooter/page'
 import axios from 'axios';
 import './CreateProduct.css';
 
@@ -13,7 +14,7 @@ interface Product {
   images: string;
 }
 
-const CreateProduct: React.FC = () => {
+const CreateProduct= () => {
   const [name, setName] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
@@ -64,11 +65,12 @@ const CreateProduct: React.FC = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className='bg-jaunee'>
+      <div >
         <SellerNavbar />
       </div>
-      <div className="create">
+      <div className="create bg-white mb-20 ">
+        
         <h2>Create New Product</h2>
         <form>
           <div className="group">
@@ -107,11 +109,12 @@ const CreateProduct: React.FC = () => {
             <input type="file" onChange={(e) => addProduct(e)} />
           </div>
           <button className="btn" onClick={() => add(obj)}>
-            <span className="btn-text-one">Update Product</span>
+            <span className="btn-text-one">Add Product</span>
             <span className="btn-text-two">Click Now!</span>
           </button>
         </form>
       </div>
+      <SellerFooter/>
     </div>
   );
 };

@@ -115,18 +115,18 @@ const UpdateProduct: React.FC<UpdateProductProps> = ({ oneProduct }) => {
             <option value="Lantern">Lantern</option>
           </select>
         </div>
-        <button type="button" onClick={modify}>
+        <button id="update" type="button" onClick={modify}>
           Update Product
         </button>
       </form>
 
-      {/* Confirmation Modal */}
+      
       {showConfirmationModal && (
-        <div className="confirmation-modal">
+        <div className="confirmation-modal bg-white">
           <div className="confirmation-content">
             <p>Are you sure you want to update this product?</p>
-            <button onClick={confirmUpdate}>Confirm</button>
-            <button onClick={cancelUpdate}>Cancel</button>
+            <button id="update1" onClick={confirmUpdate}>Confirm</button>
+            <button id="update1" onClick={cancelUpdate}>Cancel</button>
           </div>
         </div>
       )}

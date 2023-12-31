@@ -13,6 +13,7 @@ import SellerNavbar from '../../SellerNavbar/page';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import SellerFooter from '../../SellerFooter/page'
 
 interface ProfileProps {}
 
@@ -81,7 +82,7 @@ const Profile: React.FC<ProfileProps> = () => {
   };
 
   return (
-    <div>
+    <div className='bg-jaunee'>
       <SellerNavbar />
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
@@ -100,7 +101,7 @@ const Profile: React.FC<ProfileProps> = () => {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
-                {/* ... (rest of the code remains unchanged) */}
+                
               </Grid>
               <Button
                 type="submit"
@@ -124,6 +125,7 @@ const Profile: React.FC<ProfileProps> = () => {
           </Box>
         </Container>
       </ThemeProvider>
+      <SellerFooter/>
     </div>
   );
 };
