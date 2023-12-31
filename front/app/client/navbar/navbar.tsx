@@ -20,7 +20,10 @@ const navbarOther=()=>{
     <li className="font-semibold text-gray-700"><Link href={"/client/profile"}>
      Profile
     </Link></li>
-      <li className="font-semibold text-gray-700"><Link href={"/login"}>
+      <li className="font-semibold text-gray-700"
+      ><Link 
+   
+      href={'/login'}>
      Sign Out
     </Link></li>
     </ul>

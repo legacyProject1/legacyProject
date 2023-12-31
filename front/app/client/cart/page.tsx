@@ -4,6 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Navbar from "../navbar/navbar"
 import Footer from "../component/footer"
+import { useRouter } from 'next/navigation';
 
 
 interface Product {
@@ -23,7 +24,15 @@ const Cart: React.FC = () => {
   const [quantities, setQuantities] = useState<Quantities>({});
   
   const id: string | undefined = Cookies.get('userId'); 
-
+  const router=useRouter()
+  useEffect(()=>{
+    const userId=localStorage.getItem('token')?.split(',')[1]
+    if(userId){
+      router.push('/client/cart')
+    }
+    else{
+    router.push('/login')}
+  },[])
   useEffect(() => {
     if (id) {
       fetchProducts();
