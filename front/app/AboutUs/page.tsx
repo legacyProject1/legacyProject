@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import SellerNavbar from '../SellerNavbar/page';
 import SellerFooter from '../SellerFooter/page'

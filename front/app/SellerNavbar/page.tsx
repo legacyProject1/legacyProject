@@ -4,6 +4,8 @@ import tailwind from'../../tailwind.config'
 
 
 const SellerNavbar = () => {
+  const token=localStorage.getItem('token')?.split(',')[1]
+
   return (
     
     <div className="bg-malek bg-cover h-[600px] rounded-b-[200px]">
@@ -21,7 +23,7 @@ const SellerNavbar = () => {
   
           <li>
             <div className="group">
-              <Link href="/SellerProfile/:id">
+              <Link href={`/SellerProfile/${token}`}>
               <button className="text-2xl font-bold border border-white hover:border-none border-double hover:bg-gradient-to-r from-jaunema to-jaune text-white px-10 py-2 rounded-3xl">Profile</button>
 
               </Link>

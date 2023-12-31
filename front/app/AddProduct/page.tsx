@@ -4,6 +4,7 @@ import SellerNavbar from '../SellerNavbar/page';
 import SellerFooter from '../SellerFooter/page'
 import axios from 'axios';
 import './CreateProduct.css';
+import { LocaleRouteNormalizer } from 'next/dist/server/future/normalizers/locale-route-normalizer';
 
 interface Product {
   name: string;
@@ -43,7 +44,7 @@ const CreateProduct= () => {
         });
     }
   };
-
+const userId=localStorage.getItem('token')?.split(',')[1]
   const obj: Product = {
     name: name,
     price: price,
@@ -51,6 +52,7 @@ const CreateProduct= () => {
     unit: unit,
     category: category,
     images: imgUrl,
+    userId:userId
   };
 
   const add = () => {

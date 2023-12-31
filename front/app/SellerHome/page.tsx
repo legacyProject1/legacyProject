@@ -16,10 +16,11 @@ interface Product {
 
 const SellerHome = () => {
   const [Products, setProducts] = useState<Product[]>([]);
+const userId=localStorage.getItem('token')?.split(',')[1]
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/seller/getAll')
+      .get('http://localhost:3000/seller/getAll/'+userId)
       .then((res) => {
         const Products: Product[] = res.data;
         setProducts(Products);
