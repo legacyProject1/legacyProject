@@ -1,20 +1,4 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
 
-div {
-    box-sizing: border-box;
-}
-
-.Navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-}
 
 .product-container {
     max-width: 800px;
@@ -32,6 +16,8 @@ div {
 
 .product-container img {
     max-width: 100%;
+    width:20cm;
+    height: 20cm;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -46,35 +32,6 @@ div {
     margin-top: 10px;
     color: #666;
 }
-
-button {
-  background-color: #eee;
-  border: none;
-  padding: 1rem;
-  font-size: 1rem;
-  width: 10em;
-  border-radius: 1rem;
-  color: lightcoral;
-  box-shadow: 0 0.4rem #dfd9d9;
-  cursor: pointer;
- }
- 
- button:active {
-  color: white;
-  box-shadow: 0 0.2rem #dfd9d9;
-  transform: translateY(0.2rem);
- }
- 
- button:hover:not(:disabled) {
-  background: lightcoral;
-  color: white;
-  text-shadow: 0 0.1rem #bcb4b4;
- }
- 
- button:disabled {
-  cursor: auto;
-  color: grey;
- }
 
  .confirmation-modal {
     position: fixed;
@@ -91,3 +48,30 @@ button {
   .confirmation-content {
     text-align: center;
   }
+  #update {
+    padding: 10px 20px;
+    background-color: #003f83;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #update:hover {
+    background-color: #012246;
+  }
+
+  #update1 {
+    padding: 10px 20px;
+    background-color: #c70000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #update1:hover {
+    background-color: #460000;
+  } 

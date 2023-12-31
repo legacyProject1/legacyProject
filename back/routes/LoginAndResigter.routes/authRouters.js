@@ -9,5 +9,4 @@ translateRoute.get("/getUser", mid.verifyToken,controllers.getUser);
 
 
 
-
 module.exports = translateRoute;

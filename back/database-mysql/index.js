@@ -134,4 +134,4 @@ User.hasOne(Cart)
 
 
 
-module.exports={User,Product,Cart,WishList}
+module.exports={User,Product,Cart,WishList,Contact}

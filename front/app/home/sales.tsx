@@ -10,6 +10,7 @@ const Sales = () => {
     const[index,setIndex]=useState(-1)
     const[heart,setHeart]=useState(false)
     const token=localStorage.getItem('token')
+
     const router= useRouter()
 
 useEffect(()=>{

@@ -14,6 +14,13 @@ const verifyToken=(req,res,next)=>{
     })
     next()
 }
+const verifyAminToken=(req,res,next)=>{
+    const token=req.headers['authorization']
+    const t=token.split(" ")[1]
+    const decoded = jwt.verify(token, "secretKey");
+    console.log(decoded,'/n',token);
+
+}
 
 
-module.exports={verifyToken}
+module.exports={verifyToken,verifyAminToken}

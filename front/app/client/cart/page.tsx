@@ -15,7 +15,7 @@ interface Product {
 
 
 type Quantities = {
-  [productId: string]: number;
+  [productId: number]: number;
 };
 
 const Cart: React.FC = () => {
@@ -65,7 +65,7 @@ const Cart: React.FC = () => {
     }));
   };
 
-  const calculateTotalPrice = (product) => {
+  const calculateTotalPrice = (product:Product) => {
     return product.price * quantities[product.id];
   };
 

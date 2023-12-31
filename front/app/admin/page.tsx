@@ -13,13 +13,12 @@ const[notFound,setNotFound]=useState(false)
   const login=()=>{
     axios.post(`http://localhost:3000/auth/login`,{email:email,password:pass})
     .then(r=>{
-      localStorage.setItem('token',`${r.data.token},${r.data.id}`)
-    
-      if(r.data.role==='client'){
-        router.push('/home')}
-      else if(r.data.role==='seller'){
-        router.push('/SellerHome')
-      }      
+      localStorage.setItem('token',r.data.token)
+      if(r.data.role==='admin'){
+        router.push('/adminDashboard')
+      }
+        
+      
       
     }).catch(err=>setNotFound(true))
   }
@@ -50,7 +49,7 @@ const[notFound,setNotFound]=useState(false)
               <h1>Sign in to continue </h1>
 
               <div>
-              <Link href={'/register'}><button className=' text-blue float-right font-bold mr-10 mb-5'>register</button></Link>
+              <Link href={'/adminRegister'}><button className=' text-blue float-right font-bold mr-10 mb-5'>register</button></Link>
                   <br />
           <input type="email"
           placeholder='Email Adress or Username'
@@ -81,7 +80,7 @@ const[notFound,setNotFound]=useState(false)
         {/* <div className='bg-gray w-64 h-64 rounded-full absolute'></div> */}
         <img className='w-full h-full float-right' src="https://static.vecteezy.com/ti/vecteur-libre/p3/2441473-illustration-de-camping-de-nuit-gratuit-vectoriel.jpg" alt="" />
         </div>
-       { notFound&&<Alert severity="error" className='absolute top-[90%] left-[20%]'>User Not Found!</Alert>
+       { notFound&&<Alert severity="error" className='absolute top-[90%] left-[20%]'>Admin Not Found!</Alert>
 }
         </div>
   )
