@@ -44,7 +44,7 @@ const OneProduct: React.FC = () => {
      return (
     <div>
     <Navbar/>
-    <div className="bg-gray-100 dark:bg-gray-800 py-8">
+    <div className="bg-gray-100 dark:bg-gray-800 py-8 bg-white">
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row -mx-4">
             <div className="md:flex-1 px-4">
@@ -63,12 +63,12 @@ const OneProduct: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="md:flex-1 px-4">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-black mb-2">{oneItem.name}</h2>
-                <div className="flex mb-4">
+            <div className="md:flex-1 px-4 mt-8">
+                <h2 className="text-5xl font-bold text-gray-800 dark:text-black mb-2 text-center">{oneItem.name}</h2>
+                <div className="flex mb-4 mt-9">
                     <div className="mr-4">
                         <span className="font-bold text-gray-700 dark:text-gray-300">Price:</span>
-                        <span className="text-gray-600 dark:text-gray-300">{oneItem.price}</span>
+                        <span className="text-gray-600 dark:text-gray-300">{oneItem.price} DT</span>
                     </div>
                     <div>
                         <span className="font-bold text-gray-700 dark:text-gray-300">Availability:</span>
