@@ -17,7 +17,7 @@ interface RoleObject {
 
 const listOfUser= () => {
     const [Data, setData] = useState<UserProps[]>([]);
-    const [rol,setRol] =useState <string>('')
+    const [rol,setRol] =useState('')
     const [refresh, setRefresh] = useState<boolean>(false);
 
 
@@ -25,19 +25,16 @@ const listOfUser= () => {
       axios
         .get('http://127.0.0.1:3000/admin/getAllClients')
         .then((res) => {
-          const Data: UserProps[] = res.data;
-          setData(Data);
+          setData(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     }, []);
-    const change = (e: ChangeEvent<HTMLSelectElement>) => {
-      setRol(e.target.value);
-    };
-  const update = async (id: number, roleObj: RoleObject) => {
+    
+  const update = async (id: number) => {
     try {
-      const res = await axios.put(`http://127.0.0.1:3000/admin/updateRole/${id}`, roleObj);
+      const res = await axios.put(`http://127.0.0.1:3000/admin/updateRole/${id}`, {role:rol});
 
       setData(res.data);
 
@@ -74,7 +71,7 @@ const listOfUser= () => {
           </thead>
  
           <tbody>
-          {Data.map((el)=>(
+          {Data.length&&Data.map((el)=>(
             <tr>
               <td className="py-2 px-4 border-b">{el.id}</td>
               <td className="py-2 px-4 border-b"> {el.firstName}  </td>
@@ -82,17 +79,18 @@ const listOfUser= () => {
               <td className="py-2 px-4 border-b">{el.adress}</td>
               <td className="py-2 px-4 border-b">{el.email}</td>
               <td className="py-2 px-4 border-b">
-<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">shose role</label>
+<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">choose role</label>
 <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-onChange={change}>
+onChange={(e)=>{setRol(e.target.value)
+console.log(e.target.value)}}>
   <option selected>Choose a role</option>
-  <option value="US">User</option>
-  <option value="CA">Admin</option>
-  <option value="FR">Seller</option>
+  <option value="client">User</option>
+  <option value="admin">Admin</option>
+  <option value="seller">Seller</option>
 </select>
 </td>
 <td className="py-2 px-4 border-b"><button
-  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
 onClick={()=>{handleDelete(el.id)}}>
   <svg
     stroke="currentColor"
@@ -112,8 +110,8 @@ onClick={()=>{handleDelete(el.id)}}>
   Delete
 </button></td>
 <td className="py-2 px-4 border-b"><button
-  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
-onClick={()=>{update(el.id,rol)}}>
+  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+onClick={()=>{update(el.id)}}>
   <svg
     stroke="currentColor"
     viewBox="0 0 24 24"
