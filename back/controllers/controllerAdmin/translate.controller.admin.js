@@ -127,7 +127,6 @@ module.exports.logAdmin=(async(req,res)=>{
   const isPass=await bcrypt.compare(password,exist[0].password)
     if(!isPass){
     return res.status(400).json({err:"not found"})}
-      // console.log(exist[0].firstName)
     const token=jwt.sign({id:exist[0].id},"secretKey",{expiresIn:"7h"})
     console.log(token)
     return res.status(200).json({token:token,exist})
