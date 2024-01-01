@@ -68,6 +68,7 @@ const listOfSeller = () => {
               <th className="py-2 px-4 border-b">email</th>
               <th className="py-2 px-4 border-b"></th>
               <th className="py-2 px-4 border-b"></th>
+              <th className="py-2 px-4 border-b"></th>
 
             </tr>
           </thead>

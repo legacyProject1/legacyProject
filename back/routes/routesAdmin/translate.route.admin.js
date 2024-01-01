@@ -8,5 +8,8 @@ translateRoute.post("/addProduct", controller.addProduct);
 translateRoute.put("/updateRole/:id", controller.updateRole);
 translateRoute.delete("/deleteProduct/:id", controller.deleteProduct);
 translateRoute.delete("/deleteUser/:id", controller.deleteUser);
+translateRoute.post("/addUser", controller.addUser);
+
+
 
 module.exports = translateRoute;

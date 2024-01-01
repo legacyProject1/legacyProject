@@ -110,6 +110,28 @@ module.exports.deleteUser=(async(req,res)=>{
     res.status(500).json(err);
   }
 })
+module.exports.addUser=(async(req,res)=>{
+  const {firstName,lastName,adress,password,email,role}=req.body
 
+  try{
+    console.log(req.body);
+
+    const newProduct = await User.create({
+      firstName,
+      lastName,
+      adress,
+      password,
+      email,
+      role
+    });
+
+    console.log(newProduct); 
+
+    res.json({User:newProduct})
+  } catch(err){
+    console.error(err) 
+    res.status(500).json(err)
+  }
+});
 
 
