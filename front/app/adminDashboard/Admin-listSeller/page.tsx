@@ -19,8 +19,9 @@ const listOfSeller = () => {
 
 
     useEffect(() => {
+      const token=localStorage.getItem('token')
       axios
-        .get('http://localhost:3000/admin/getAllSellers')
+        .get('http://localhost:3000/admin/getAllSellers',{headers:{Authorization:`Bearer ${token}`}})
         .then((res) => {
           setData(res.data);
         })

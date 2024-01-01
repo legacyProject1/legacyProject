@@ -13,14 +13,15 @@ const Register = () => {
     const[name,setName]=useState(null)
     const[role,setRole]=useState("seller")
     const[logged,setLogged]=useState(false)
-
+  const[noPass,setNoPass]=useState('')
+  const[show,setShow]=useState(false)
 const add=()=>{
     axios.post(`http://localhost:3000/auth/register`,{firstName:name,email:email,password:pass,role:role})
     .then(r=>{setLogged(true)
     setTimeout(() => {
       router.push('/login')
     }, 1500);
-    }).catch(err=>console.log(err))
+    }).catch(err=>setNoPass(err.response.data.err))
 }
     
   return (
@@ -63,10 +64,19 @@ const add=()=>{
          onChange={(e)=>setEmail(e.target.value)}
          className='w-[30rem] h-14 border border-gray-400 p-4  text-sm	mb-10'
          />
-        <input placeholder='Password' required type="password"
+        <input 
+        onMouseEnter={()=>setShow(true)}
+        onMouseLeave={()=>setShow(false)}
+        placeholder='Password' required type="password"
         onChange={(e)=>setPass(e.target.value)}
         className='w-[30rem] h-14 border border-gray-400 p-4  text-sm mb-5	'
         />
+        {show&&<div className='top-[45%] left-[13%] flex justify-center items-center absolute w-[200px] h-[150px] bg-white border border-bluer rounded-2xl'>
+                <ul className='text-[10px]'>
+                  <li className='mb-5'>Password must contain 8 characters or more</li>
+                  <li>Password must contain @-#-? characters</li>
+                </ul>
+        </div>}
         <br />
         <h1 >Role:</h1><br />
       <select onChange={(e)=>setRole(e.target.value) }
@@ -80,7 +90,7 @@ const add=()=>{
        className='flex justify-center items-center w-[30rem] h-14 bg-blue mt-10 text-white'>register</button>
                   <br />
               </div>
-
+{noPass==="password is weak!"&&<Alert severity="error" className='absolute top-[77%] left-[30%]'>Password is weak!</Alert>}
         </div>
         </div>
         <div>

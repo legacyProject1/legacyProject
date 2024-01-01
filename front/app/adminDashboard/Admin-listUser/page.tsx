@@ -22,8 +22,9 @@ const listOfUser= () => {
 
 
     useEffect(() => {
+      const token=localStorage.getItem('token')
       axios
-        .get('http://127.0.0.1:3000/admin/getAllClients')
+        .get('http://127.0.0.1:3000/admin/getAllClients',{headers:{Authorization:`Bearer ${token}`}})
         .then((res) => {
           setData(res.data);
         })

@@ -122,14 +122,14 @@ User.hasOne(Cart)
 // this call, Sequelize will automatically perform an SQL query to the database and create a table, printing the message phrase table created successfully!.
 // please run this below *****one time***** after creating your connection
 
-connection
-  .sync({ force: true })
-  .then(() => {
-    console.log("db created successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to create db : ", error);
-  });
+// connection
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("db created successfully!");
+//   })
+//   .catch((error) => {
+//     console.error("Unable to create db : ", error);
+//   });
 
 
 
