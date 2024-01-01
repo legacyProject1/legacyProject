@@ -18,7 +18,10 @@ interface ProductProps{
 const listOfProduct = () => {
     const [Data, setData] = useState<ProductProps[]>([]);
     const router = useRouter()
-   
+   const deleti=(id:number)=>{
+    axios.delete(`http://localhost:3000/admin/deleteProduct/${id}`)
+    .then(r=>console.log('deleted')).catch(err=>console.log(err))
+   }
   useEffect(() => {
     axios
       .get('http://localhost:3000/client/getAllProduct')
@@ -54,8 +57,10 @@ const listOfProduct = () => {
               <td className="py-2 px-4 border-b">{el.name}</td>
               <td className="py-2 px-4 border-b">{el.description}</td>
               <td className="py-2 px-4 border-b">{el.price}</td>
-              <td className="py-2 px-4 border-b"><button
-  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+              <td className="py-2 px-4 border-b">
+              <button
+  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+            onClick={()=>deleti(el.id)}
 >
   <svg
     stroke="currentColor"
@@ -73,8 +78,8 @@ const listOfProduct = () => {
   </svg>
 
   Delete
-</button></td>
-            </tr>))}
+</button>
+</td></tr>))}
           </tbody>
         </table>
        </div>

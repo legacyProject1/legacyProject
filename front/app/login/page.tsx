@@ -13,7 +13,8 @@ const[notFound,setNotFound]=useState(false)
   const login=()=>{
     axios.post(`http://localhost:3000/auth/login`,{email:email,password:pass})
     .then(r=>{
-      localStorage.setItem('token',r.data.token)
+      localStorage.setItem('token',`${r.data.token},${r.data.id}`)
+    
       if(r.data.role==='client'){
         router.push('/home')}
       else if(r.data.role==='seller'){

@@ -14,14 +14,16 @@ const config: Config = {
       "bluer":'#1e3a8a',
       "bluee":'#93c5fd',
       "jaune":'#92400e',
-      "jaunee":'#fef3c7',
+      "jaunee":'#fffbeb',
       'black':'#000000',
       'blue':'#5995cc',
       'gray-400':'#94a3b8',
       'gray-700':'#334155',
       'orange':'#e83e01',
       'bg':'#faf5f2',
-      'green-400':'#a3e635'
+      'green-400':'#a3e635',
+      "jaunema":'#f59e0b',
+      "bluemalik":"#172554"
       
     },
     extend: {

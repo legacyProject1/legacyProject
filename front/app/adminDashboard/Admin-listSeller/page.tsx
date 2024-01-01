@@ -11,9 +11,7 @@ interface SellerProps{
   adress: string,
   email:string,
 };
-interface RoleObject {
-  role:string
-}
+
 const listOfSeller = () => {
     const [Data, setData] = useState<SellerProps[]>([]);
     const [rol,setRol] =useState <string>('')
@@ -22,10 +20,9 @@ const listOfSeller = () => {
 
     useEffect(() => {
       axios
-        .get('http://localhost:3000/client/getAllProduct')
+        .get('http://localhost:3000/admin/getAllSellers')
         .then((res) => {
-          const Data: SellerProps[] = res.data;
-          setData(Data);
+          setData(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -33,12 +30,9 @@ const listOfSeller = () => {
     }, []);
 
 
-    const update = async (id: number, roleObj: RoleObject) => {
+    const update = async (id: number) => {
       try {
-        const res = await axios.put(`http://127.0.0.1:3000/admin/updateRole/${id}`, roleObj);
-  
-        setData(res.data);
-  
+        const res = await axios.put(`http://127.0.0.1:3000/admin/updateRole/${id}`, {role:rol});  
         setRefresh(!refresh);
       } catch (err) {
         console.error(err);
@@ -74,7 +68,7 @@ const listOfSeller = () => {
           </thead>
  
           <tbody>
-          {Data.map((el)=>(
+          {Data.length&&Data.map((el)=>(
             <tr>
               <td className="py-2 px-4 border-b">{el.id}</td>
               <td className="py-2 px-4 border-b"> {el.firstName}  </td>
@@ -92,7 +86,8 @@ const listOfSeller = () => {
 </select>
 </td>
 <td className="py-2 px-4 border-b"><button
-  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+            onClick={()=>handleDelete(el.id)}
 >
   <svg
     stroke="currentColor"
@@ -112,7 +107,8 @@ const listOfSeller = () => {
   Delete
 </button></td>
 <td className="py-2 px-4 border-b"><button
-  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+  className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+  onClick={()=>update(el.id)}
 >
   <svg
     stroke="currentColor"

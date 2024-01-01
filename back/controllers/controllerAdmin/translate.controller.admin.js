@@ -1,7 +1,7 @@
 // require your Model phrase here
 const {User,Product} = require("../../database-mysql/index");
-
-
+const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 module.exports.getAllClients=(async(req,res)=>{
   try{
     const clients=await User.findAll({
@@ -110,28 +110,31 @@ module.exports.deleteUser=(async(req,res)=>{
     res.status(500).json(err);
   }
 })
-module.exports.addUser=(async(req,res)=>{
-  const {firstName,lastName,adress,password,email,role}=req.body
+module.exports.getAdmin=async(req,res)=>{
+  let d=await User.findAll({where:{id:req.id,role:'admin'}})
+  res.json(d)
+  
+}
 
+module.exports.logAdmin=async(req,res)=>{
   try{
-    console.log(req.body);
-
-    const newProduct = await User.create({
-      firstName,
-      lastName,
-      adress,
-      password,
-      email,
-      role
-    });
-
-    console.log(newProduct); 
-
-    res.json({User:newProduct})
-  } catch(err){
-    console.error(err) 
-    res.status(500).json(err)
+  const {email,password}=req.body
+  let exist=await User.findOne({where:{email,role:"admin"}})
+  if(!exist){
+    return res.status(400).json({err:'not found'})
   }
-});
+  const isPass=await bcrypt.compare(password,exist.password)
+    if(!isPass){
+    return res.status(400).json({err:"not found"})}
+    // const token=jwt.sign({id:exist.id,firstName},"sekretKey",{expiresIn:"7h"})
+    return res.status(200).json(token,exist)
+  
+  }
+    catch(err){
+       res.status(502).json({err:'server err'})
+
+}
+  
+}
 
 

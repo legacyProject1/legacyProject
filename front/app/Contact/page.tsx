@@ -1,9 +1,10 @@
 "use client"
-import React from 'react'
-import NavbarOther from '../navbar'
-import Footer from '../../component/footer'
-import { useState } from 'react'
-import axios from "axios"
+import React, { useState } from 'react'
+import SellerNavbar from '../SellerNavbar/page';
+import SellerFooter from '../SellerFooter/page'
+import { cpSync } from 'fs';
+import axios from 'axios'
+
 function Contact() {
 	const[name,setName]=useState("")
 	const[email,setEmail]=useState("")
@@ -13,9 +14,9 @@ function Contact() {
 		.then(r=>('contact added')).catch(err=>console.log(err))
 	}
   return (
-	<div>
-		<NavbarOther/>
-    <section className="py-6 dark:bg-gray-800 dark:text-gray-50 my-20">
+	<div className='bg-jaunee'>
+		<SellerNavbar/>
+    <section className="py-6 dark:bg-white dark:text-gray-50 my-20 ml-[100px] mr-[100px] shadow-2xl">
 	<div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
 		<div className="py-6 md:py-0 md:px-6">
 			<h1 className="text-4xl font-bold">Get in touch</h1>
@@ -50,25 +51,29 @@ function Contact() {
 			</label>
 			<label className="block">
 				<span className="mb-1">Email address</span>
-				<input 
+				<input
 				onChange={(e)=>setEmail(e.target.value)}
 				type="email"  className="block w-full rounded-md shadow-sm focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"/>
 			</label>
 			<label className="block">
 				<span className="mb-1">Message</span>
-				<textarea 
+				<textarea  
 				onChange={(e)=>{setMess(e.target.value)
-					console.log(e.target.value)}}
+				console.log(e.target.value)}}
+
 				className="block w-full rounded-md focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"></textarea>
 			</label>
+			
 			<button 
+			
 			onClick={()=>{conpost()
-				console.log('helo')}}
+			console.log('helo')}}
 			type="button" className="self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ri dark:bg-violet-400 dark:text-gray-900 focus:ri hover:ri">Submit</button>
 		</form>
 	</div>
+	
 </section>
-<Footer/>
+<SellerFooter/>
 </div>
   )
 }
