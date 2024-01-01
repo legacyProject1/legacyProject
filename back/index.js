@@ -31,7 +31,6 @@ app.use("/seller", SellerRoute);
 app.use("/wishList", WishListRoute);
 app.use('/api',translateRoute)
 app.use('/contact',conRoutes)
-app.use('/admin',translateRoute)
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });

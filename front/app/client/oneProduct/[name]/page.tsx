@@ -19,9 +19,9 @@ interface CartItem {
     productId: number;
     userId: number
   }
-
 const OneProduct: React.FC = () => {
-
+    const user = localStorage.getItem('token')?.split(',')[1]
+    
     const [oneItem, setOneItem] = useState<Product>({id: 0, name: '', images: '', price: 0, description: '', userId:0});
     const {name} = useParams()
 
@@ -40,6 +40,12 @@ const OneProduct: React.FC = () => {
         axios.post(`http://localhost:3000/Cart/add`,obj)
          .then(r=>console.log('added',r)).catch(err=>console.log(err))
         }
+        const add1=(obj1:object)=>{
+                axios.post(`http://localhost:3000/wishList/addProductToWishList`,obj1)
+                .then(r=>console.log('added')).catch(err=>console.log(err))
+
+              
+        }
 
      return (
     <div>
@@ -55,11 +61,13 @@ const OneProduct: React.FC = () => {
                     <div className="w-1/2 px-2">
                         <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600"
                         onClick={()=>
-                            add({userId:oneItem.userId ,productId:oneItem.id})
+                            add({userId:user ,productId:oneItem.id})
                               }>Add to Cart</button>
                     </div>
                     <div className="w-1/2 px-2">
-                        <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">Add to Wishlist</button>
+                        <button 
+                        onClick={()=>add1({userId:user,productId:oneItem.id})}
+                        className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">Add to Wishlist</button>
                     </div>
                 </div>
             </div>

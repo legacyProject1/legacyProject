@@ -11,9 +11,9 @@ const Login= () => {
   const[pass,setPass]=useState("")
 const[notFound,setNotFound]=useState(false)
   const login=()=>{
-    axios.post(`http://localhost:3000/auth/login`,{email:email,password:pass})
+    axios.post(`http://localhost:3000/admin`,{email:email,password:pass})
     .then(r=>{
-      localStorage.setItem('token',r.data.token)
+      // localStorage.setItem('user',r.data.token)
       if(r.data.role==='admin'){
         router.push('/adminDashboard')
       }

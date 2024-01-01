@@ -22,8 +22,7 @@ type Quantities = {
 const Cart: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [quantities, setQuantities] = useState<Quantities>({});
-  
-  const id: string | undefined = Cookies.get('userId'); 
+  const id=localStorage.getItem('token')?.split(',')[1]
   const router=useRouter()
   useEffect(()=>{
     const userId=localStorage.getItem('token')?.split(',')[1]
@@ -41,7 +40,7 @@ const Cart: React.FC = () => {
 
   const fetchProducts = async (): Promise<void> => {
     try {
-      const response = await axios.get<Product[]>(`http://localhost:3000/Cart/get/${id}`);
+      const response = await axios.get<Product[]>(`http://localhost:3000/cart/get/${id}`);
       setProducts(response.data);
       const initialQuantities: Quantities = {};
       response.data.forEach((product) => {

@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import Searchbar from "../component/searchbar"
-
+import Signout from "./signout"
 const navbarOther=()=>{
     return(
         <nav className="flex justify-between px-20 py-10 items-center bg-white">
@@ -21,11 +21,7 @@ const navbarOther=()=>{
      Profile
     </Link></li>
       <li className="font-semibold text-gray-700"
-      ><Link 
-   
-      href={'/login'}>
-     Sign Out
-    </Link></li>
+      ><Signout/></li>
     </ul>
   </div> 
 </nav>

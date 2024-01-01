@@ -26,6 +26,7 @@ const router=useRouter()
     else{
     router.push('/login')}
   },[])
+ 
     useEffect(() => {
       const fetchWishlist = async () => {
         try {
@@ -40,7 +41,6 @@ const router=useRouter()
   
       fetchWishlist();
     }, [userId]);
-  console.log("ena",postData)
     const handleDelete = async (productId: number) => {
       try {
         await fetch(`http://localhost:3000/wishList/deleteOneProductFromWishlist/${productId}`, {
