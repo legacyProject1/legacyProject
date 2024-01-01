@@ -116,25 +116,28 @@ module.exports.getAdmin=async(req,res)=>{
   
 }
 
-module.exports.logAdmin=async(req,res)=>{
+module.exports.logAdmin=(async(req,res)=>{
   try{
   const {email,password}=req.body
-  let exist=await User.findOne({where:{email,role:"admin"}})
-  if(!exist){
+  console.log('ena')
+  let exist=await User.findAll({where:{email}})
+  if(exist.length===0){
     return res.status(400).json({err:'not found'})
   }
-  const isPass=await bcrypt.compare(password,exist.password)
+  const isPass=await bcrypt.compare(password,exist[0].password)
     if(!isPass){
     return res.status(400).json({err:"not found"})}
-    // const token=jwt.sign({id:exist.id,firstName},"sekretKey",{expiresIn:"7h"})
-    return res.status(200).json(token,exist)
+      // console.log(exist[0].firstName)
+    const token=jwt.sign({id:exist[0].id},"secretKey",{expiresIn:"7h"})
+    console.log(token)
+    return res.status(200).json({token:token,exist})
   
   }
-    catch(err){
+    catch(erreur){
        res.status(502).json({err:'server err'})
 
 }
   
-}
+})
 
 
