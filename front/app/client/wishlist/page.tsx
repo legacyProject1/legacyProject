@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../navbar/navbar";
 import Footer from "../component/footer";
-import Cookies from "js-cookie";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 
 
@@ -15,16 +15,24 @@ import axios from "axios";
   }
   
   const Wishlist: React.FC = () => {
-
+const router=useRouter()
     const [postData, setPostData] = useState<Product[]>([]);
-    const userId: string | undefined = Cookies.get('userId');
-  
+    const userId=localStorage.getItem('token')?.split(',')[1]
+  useEffect(()=>{
+    const userId=localStorage.getItem('token')?.split(',')[1]
+    if(userId){
+      router.push('/client/wishlist')
+    }
+    else{
+    router.push('/login')}
+  },[])
+ 
     useEffect(() => {
       const fetchWishlist = async () => {
-        if (!userId) return
         try {
           const response = await fetch(`http://localhost:3000/wishList/getProductsOfUserInWishList/${userId}`);
           const responseData: Product[] = await response.json();
+          
           setPostData(responseData);
         } catch (error) {
           console.log("Error fetching data:", error);
@@ -33,7 +41,6 @@ import axios from "axios";
   
       fetchWishlist();
     }, [userId]);
-  
     const handleDelete = async (productId: number) => {
       try {
         await fetch(`http://localhost:3000/wishList/deleteOneProductFromWishlist/${productId}`, {

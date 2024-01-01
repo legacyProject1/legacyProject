@@ -1,4 +1,4 @@
-
+import AdminDashboard from './adminDashboard/page'
 import Register from './register/page'
 
 

@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSearchParams } from 'next/navigation'
@@ -5,6 +6,7 @@ import Link from 'next/link'
 import Sales from './sales'
 import Footer from './footer'
 import Searchbar from '../client/component/searchbar'
+import Signout from './signout'
 const Home = () => {
 
 
@@ -20,8 +22,7 @@ const Home = () => {
         <Link href={'/client/cart'}>Basket</Link>
         <Searchbar/>
         <div className='flex gap-4 ml-36'>
-        <Link href={('/login')} className='mt-2'>Sign Out</Link>
-
+        <Signout/>
         </div>
       </div>
       <div className=' absolute text-white z-10 '>

@@ -29,8 +29,9 @@ const GetUsers = function (req, res) {
     });
 };
 const getUser=async function (req,res){
+if(req.id){
  let d=await User.findOne({where:{id:req.id}})
- res.json(d)
+ res.json(d)}
 }
 
 const generateToken = (id, firstName) => {

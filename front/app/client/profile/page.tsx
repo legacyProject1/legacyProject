@@ -3,8 +3,8 @@ import React from 'react'
 import NavbarOther from '../navbar/navbar'
 import Footer from '../component/footer'
 import  { useState , useEffect} from "react"; 
-import Cookies from 'js-cookie';
 import axios from "axios"
+import { useRouter } from 'next/navigation';
 
 const Profile = () => {
 
@@ -12,45 +12,20 @@ const [firstName,setFirstName]=useState("")
 const [lastName,setLastName]=useState("")
 const [email,setEmail]=useState("")
 const [adress,setAdress]=useState("")
-const [currentPassword,setCurrentPassword]=useState("")
 const [newPassword,setNewPassword]=useState("")
-const [userid,setUserId]= useState('')
-const [confirmPassword,setConfirmPassword]= useState("")
-
-useEffect(() => {
-  
-    const token = Cookies.get('token');
-    const userId = Cookies.get('userId');
-    const email = Cookies.get('email');
-    const password = Cookies.get('password')
-    const firstName = Cookies.get('firstName')
-    const lastName = Cookies.get('lastName')
-    const adress = Cookies.get('adress')
-    
-  
-  
-    if (token && userId) {
-      setUserId(userId)
-     setFirstName(firstName)
-     setLastName(lastName)
-     setAdress(adress)
-      setCurrentPassword(password)
-      setEmail(email)
-    } else {
-    
-      console.log('User is not authenticated');
+const router=useRouter()
+useEffect(()=>{
+    const userId=localStorage.getItem('token')?.split(',')[1]
+    if(userId){
+      router.push('/client/profile')
     }
-  }, []);
-  
-  const modifyProfile = (user) => {
-  
-  if(user.newPassword.length <8){
-    alert("Enter a strong password: " );
-    return 
-  }
-    if (user.newPassword === confirmPassword) {
+    else{
+    router.push('/login')}
+  },[])
+const modifyProfile = (user:Object) => {
+const idUser=localStorage.getItem('token')?.split(',')[1]
       axios
-        .post("http://localhost:3000/clients/UpdateClients", user)
+        .put("http://localhost:3000/client/UpdateClients/"+idUser, user)
         .then((res) => {
   console.log(res.data,"res")
           alert("You successfully updated your account");
@@ -61,7 +36,7 @@ useEffect(() => {
           // alert("check your password is incorrect")
   
         );
-    }
+    
   }
 
   return (
@@ -149,7 +124,7 @@ useEffect(() => {
                             <label 
                                 className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Current Password</label>
                             <input
-                            onChange={(e)=>setCurrentPassword(e.target.value)}
+                            
                              type="password" id="CurrentPassword"
                                 className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                                 placeholder="Current Password" required/>
@@ -167,7 +142,7 @@ useEffect(() => {
                             <label 
                                 className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Confirm Password</label>
                             <input
-                            onChange={(e)=>setConfirmPassword(e.target.value)}
+                            onChange={(e)=>setNewPassword(e.target.value)}
                              type="password" id="ConfirmPassword"
                                 className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                                 placeholder="Confirm Password" required/>
@@ -175,7 +150,7 @@ useEffect(() => {
                         <div className="flex justify-end">
                             <button type="submit"
                                 className="text-black bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
-                                onClick={()=>{modifyProfile({email:email,newPassword:newPassword,currentPassword:currentPassword,firstName:firstName,lastName:lastName,adress:adress})}}
+                                onClick={()=>{modifyProfile({email:email,password:newPassword,firstName:firstName,lastName:lastName,adress:adress})}}
                                 >Save</button>
                         </div>
 

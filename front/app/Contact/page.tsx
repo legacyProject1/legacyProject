@@ -1,10 +1,18 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import SellerNavbar from '../SellerNavbar/page';
 import SellerFooter from '../SellerFooter/page'
+import { cpSync } from 'fs';
+import axios from 'axios'
 
-
-function contact() {
+function Contact() {
+	const[name,setName]=useState("")
+	const[email,setEmail]=useState("")
+	const[mess,setMess]=useState("")
+	const conpost=()=>{
+		axios.post(`http://localhost:3000/contact/add`,{firstName:name,email:email,message:mess})
+		.then(r=>('contact added')).catch(err=>console.log(err))
+	}
   return (
 	<div className='bg-jaunee'>
 		<SellerNavbar/>
@@ -37,23 +45,37 @@ function contact() {
 		<form className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
 			<label className="block">
 				<span className="mb-1">Full name</span>
-				<input type="text"  className="block w-full rounded-md shadow-sm focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"/>
+				<input 
+				onChange={(e)=>setName(e.target.value)}
+				type="text"  className="block w-full rounded-md shadow-sm focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"/>
 			</label>
 			<label className="block">
 				<span className="mb-1">Email address</span>
-				<input type="email"  className="block w-full rounded-md shadow-sm focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"/>
+				<input
+				onChange={(e)=>setEmail(e.target.value)}
+				type="email"  className="block w-full rounded-md shadow-sm focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"/>
 			</label>
 			<label className="block">
 				<span className="mb-1">Message</span>
-				<textarea  className="block w-full rounded-md focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"></textarea>
+				<textarea  
+				onChange={(e)=>{setMess(e.target.value)
+				console.log(e.target.value)}}
+
+				className="block w-full rounded-md focus:ring focus:ri focus:ri dark:bg-gray-800 border font-black"></textarea>
 			</label>
-			<button type="button" className="self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ri dark:bg-violet-400 dark:text-gray-900 focus:ri hover:ri">Submit</button>
+			
+			<button 
+			
+			onClick={()=>{conpost()
+			console.log('helo')}}
+			type="button" className="self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ri dark:bg-violet-400 dark:text-gray-900 focus:ri hover:ri">Submit</button>
 		</form>
 	</div>
+	
 </section>
 <SellerFooter/>
 </div>
   )
 }
 
-export default contact
+export default Contact
