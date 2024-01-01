@@ -30,7 +30,7 @@ const listOfUser= () => {
         .catch((err) => {
           console.log(err);
         });
-    }, []);
+    }, [refresh]);
     
   const update = async (id: number) => {
     try {
@@ -91,7 +91,8 @@ console.log(e.target.value)}}>
 </td>
 <td className="py-2 px-4 border-b"><button
   className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
-onClick={()=>{handleDelete(el.id)}}>
+onClick={()=>{handleDelete(el.id)
+setRefresh(!refresh)}}>
   <svg
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -111,7 +112,8 @@ onClick={()=>{handleDelete(el.id)}}>
 </button></td>
 <td className="py-2 px-4 border-b"><button
   className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
-onClick={()=>{update(el.id)}}>
+onClick={()=>{update(el.id)
+  setRefresh(!refresh)}}>
   <svg
     stroke="currentColor"
     viewBox="0 0 24 24"

@@ -17,6 +17,7 @@ interface ProductProps{
 
 const listOfProduct = () => {
     const [Data, setData] = useState<ProductProps[]>([]);
+    const[refresh,setRefresh]=useState(false)
     const router = useRouter()
    const deleti=(id:number)=>{
     axios.delete(`http://localhost:3000/admin/deleteProduct/${id}`)
@@ -32,7 +33,7 @@ const listOfProduct = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [refresh]);
   return (
     <div className="flex-row lg:flex">
     <Sidebar/> 
@@ -51,16 +52,17 @@ const listOfProduct = () => {
           </thead>
           <tbody>
           {Data.map((el)=>(
-            <tr>
-              <td className="py-2 px-4 border-b">{el.id}</td>
-              <td className="py-2 px-4 border-b"> <img className="object-cover w-full h-full" src={el.images} alt="Product"/> </td>
+            <tr className='pl-[3%]' >
+              <td className="py-2 px-4 border-b ml-[5%]">{el.id}</td>
+              <td className="py-2 px-4 border-b"> <img className="object-cover w-[50px]" src={el.images} alt="Product"/> </td>
               <td className="py-2 px-4 border-b">{el.name}</td>
               <td className="py-2 px-4 border-b">{el.description}</td>
               <td className="py-2 px-4 border-b">{el.price}</td>
               <td className="py-2 px-4 border-b">
               <button
   className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-black text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
-            onClick={()=>deleti(el.id)}
+            onClick={()=>{deleti(el.id)
+            setRefresh(!refresh)}}
 >
   <svg
     stroke="currentColor"

@@ -8,7 +8,7 @@ translateRoute.post("/addProduct", controller.addProduct);
 translateRoute.put("/updateRole/:id", controller.updateRole);
 translateRoute.delete("/deleteProduct/:id", controller.deleteProduct);
 translateRoute.delete("/deleteUser/:id", controller.deleteUser);
-translateRoute.post('/ahlan',controller.logAdmin)
+translateRoute.post('/',controller.logAdmin)
 
-translateRoute.get('/',mid.verifyAdminToken,controller.getAdmin)
+translateRoute.get('/getAdmin',mid.verifyAdminToken,controller.getAdmin)
 module.exports = translateRoute;

@@ -13,9 +13,9 @@ const Home = () => {
   return (
     <div>
       <div>
-      <div className='absolute z-10 text-white font-bold flex gap-[4rem] ml-40 m-10'>
+      <div className='absolute z-10 text-white font-bold flex gap-[4rem] ml-[17%] m-10'>
         <Link href={'/home'}>Home</Link>
-        <Link href={'/client/navbar/contact'}>Contact</Link>
+        <Link  href={'/client/navbar/contact'}>Contact</Link>
         <Link href={'/client/about'}>About</Link>
         <Link href={"/client/profile"}> Profile</Link>
         <Link href={'/client/wishlist'}>Wishlist</Link>

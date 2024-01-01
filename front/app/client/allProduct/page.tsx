@@ -22,7 +22,7 @@ const AllProduct=()=>{
     const [Data, setData] = useState<ProductProps[]>([]);
     const [SelectedCategory, setSelectedCategory] = useState<string | null>(null)
    const router = useRouter()
-   
+  
   useEffect(() => {
     axios
       .get('http://localhost:3000/client/getAllProduct')

@@ -1,5 +1,5 @@
 "use client"
-import React,{useState,createContext} from 'react'
+import React,{useState,createContext, useEffect} from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -11,10 +11,10 @@ const Login= () => {
   const[pass,setPass]=useState("")
 const[notFound,setNotFound]=useState(false)
   const login=()=>{
-    axios.post(`http://localhost:3000/admin`,{email:email,password:pass})
+   axios.post(`http://localhost:3000/admin/`,{email:email,password:pass})
     .then(r=>{
-      // localStorage.setItem('user',r.data.token)
-      if(r.data.role==='admin'){
+      localStorage.setItem('token',r.data.token)      
+      if(r.data.exist[0].role==='admin'){
         router.push('/adminDashboard')
       }
         
