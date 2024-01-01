@@ -2,7 +2,7 @@ const {User,Product } = require("../database-mysql/index");
 const bcrypt = require('bcrypt');
  
 const getAll = (req, res) => {
- Product.findAll()
+ Product.findAll({where:{userId:req.params.id}})
  .then((result)=>{
     res.status(200).send(result)
  })
@@ -10,9 +10,6 @@ const getAll = (req, res) => {
   res.status(500).send(err)
  })
 };
-
-
-
 const oneProduct = (req, res) => {
   Product.findOne({where:{id:req.params.id}})
   .then((result)=>{
@@ -30,7 +27,8 @@ const add = (req, res) => {
    description:req.body.description,
    unit:req.body.unit,
    category:req.body.category,
-   images:req.body.images
+   images:req.body.images,
+   userId:req.body.userId
  })
  .then((result)=>{
    res.status(200).send("Product created")
@@ -65,39 +63,10 @@ const remove = (req, res) => {
   })
 };
 
-const checkpassword= (req,res)=>{
-  
-      const userInfo =User.findOne({
-        where: {
-          email: req.body.email,
-        }
-      });
+const checkpassword= async(req,res)=>{
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-      if (!userInfo) {
-        return res.status(404).json({
-          status: 'error',
-          message: 'User not found',
-        });
-      }
-      const isPasswordValid =  bcrypt.compare(req.body.currentPassword, userInfo.password);
-
-      if (!isPasswordValid) {
-
-  
-        
-        return res.status(401).json({
-          status: 'error',
-          message: 'Incorrect current password',
-        });
-      }
-      const hashedNewPassword = bcrypt.hash(req.body.newPassword, 10);
- User.update({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        adress: req.body.adress,
-        email: req.body.email,
-        password: hashedNewPassword,
- }, {where:{id:req.params.id}})
+  User.update({email:req.body.email,password:hashedPassword}, {where:{id:req.params.id}})
  .then((result)=>{
    res.status(200).send("profile updated")
   })

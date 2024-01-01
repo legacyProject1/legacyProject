@@ -14,13 +14,18 @@ const verifyToken=(req,res,next)=>{
     })
     next()
 }
-const verifyAminToken=(req,res,next)=>{
+const verifyAdminToken=(req,res,next)=>{
     const token=req.headers['authorization']
     const t=token.split(" ")[1]
-    const decoded = jwt.verify(token, "secretKey");
-    console.log(decoded,'/n',token);
+    jwt.verify(t, "secretKey",(err,user)=>{
+       
+            req.id=user.id
+            next()
+        
+    });
+    return
 
 }
 
 
-module.exports={verifyToken,verifyAminToken}
+module.exports={verifyToken,verifyAdminToken}

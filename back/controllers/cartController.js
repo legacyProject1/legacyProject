@@ -16,8 +16,8 @@ module.exports.getProductsOfUserInCart = (req,res) => {
 
 module.exports.addProductToCart = (req,res) => {
   Cart.create(req.body)
-  .then((result)=>{res.status(200).send("successfully added to cart")})
- .catch((err)=>{res.status(500).send("failed to add", err)})
+  .then((result)=>{res.status(201).json({result:"successfully added to cart"})})
+ .catch((err)=>{res.status(500).json({err:err})})
 }
 module.exports.getAllProduct = (req, res) => {
  Product.findAll()

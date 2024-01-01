@@ -29,8 +29,9 @@ const GetUsers = function (req, res) {
     });
 };
 const getUser=async function (req,res){
+if(req.id){
  let d=await User.findOne({where:{id:req.id}})
- res.json(d)
+ res.json(d)}
 }
 
 const generateToken = (id, firstName) => {
@@ -87,5 +88,6 @@ const loginUser = function (req, res) {
 
     .catch((err) => res.status(500).send(err));
 };
+
 
 module.exports = { AddUser, GetUsers, loginUser, registerUser,getUser };

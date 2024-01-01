@@ -4,6 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Navbar from "../navbar/navbar"
 import Footer from "../component/footer"
+import { useRouter } from 'next/navigation';
 
 
 interface Product {
@@ -15,15 +16,22 @@ interface Product {
 
 
 type Quantities = {
-  [productId: string]: number;
+  [productId: number]: number;
 };
 
 const Cart: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [quantities, setQuantities] = useState<Quantities>({});
-  
-  const id: string | undefined = Cookies.get('userId'); 
-
+  const id=localStorage.getItem('token')?.split(',')[1]
+  const router=useRouter()
+  useEffect(()=>{
+    const userId=localStorage.getItem('token')?.split(',')[1]
+    if(userId){
+      router.push('/client/cart')
+    }
+    else{
+    router.push('/login')}
+  },[])
   useEffect(() => {
     if (id) {
       fetchProducts();
@@ -32,7 +40,7 @@ const Cart: React.FC = () => {
 
   const fetchProducts = async (): Promise<void> => {
     try {
-      const response = await axios.get<Product[]>(`http://localhost:3000/Cart/get/${id}`);
+      const response = await axios.get<Product[]>(`http://localhost:3000/cart/get/${id}`);
       setProducts(response.data);
       const initialQuantities: Quantities = {};
       response.data.forEach((product) => {
@@ -65,7 +73,7 @@ const Cart: React.FC = () => {
     }));
   };
 
-  const calculateTotalPrice = (product) => {
+  const calculateTotalPrice = (product:Product) => {
     return product.price * quantities[product.id];
   };
 

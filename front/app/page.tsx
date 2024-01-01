@@ -7,7 +7,7 @@ const  Home=()=> {
 
   return (
     <div>
-    <AdminDashboard/> 
+    <Register/> 
     
     </div>
  
