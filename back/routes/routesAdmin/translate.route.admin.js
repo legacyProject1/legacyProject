@@ -1,9 +1,9 @@
 const translateRoute = require("express").Router();
 const controller = require("../../controllers/controllerAdmin/translate.controller.admin");
 const mid=require('../../middleware/middleware')
-translateRoute.get("/getAllClients", controller.getAllClients);
-translateRoute.get("/getAllSellers", controller.getAllSellers);
-translateRoute.get("/getAllProducts", controller.getAllProducts);
+translateRoute.get("/getAllClients",mid.verifyAdminToken,controller.getAllClients);
+translateRoute.get("/getAllSellers",mid.verifyAdminToken, controller.getAllSellers);
+translateRoute.get("/getAllProducts",mid.verifyAdminToken, controller.getAllProducts);
 translateRoute.post("/addProduct", controller.addProduct);
 translateRoute.put("/updateRole/:id", controller.updateRole);
 translateRoute.delete("/deleteProduct/:id", controller.deleteProduct);

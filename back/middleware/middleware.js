@@ -18,12 +18,12 @@ const verifyAdminToken=(req,res,next)=>{
     const token=req.headers['authorization']
     const t=token.split(" ")[1]
     jwt.verify(t, "secretKey",(err,user)=>{
-       
-            req.id=user.id
-            next()
+       if(err) res.json(err)
+        req.id=user.id
+            
         
     });
-    return
+    next()
 
 }
 

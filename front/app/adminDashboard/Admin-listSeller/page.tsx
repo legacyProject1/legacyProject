@@ -19,8 +19,9 @@ const listOfSeller = () => {
 
 
     useEffect(() => {
+      const token=localStorage.getItem('token')
       axios
-        .get('http://localhost:3000/admin/getAllSellers')
+        .get('http://localhost:3000/admin/getAllSellers',{headers:{Authorization:`Bearer ${token}`}})
         .then((res) => {
           setData(res.data);
         })
@@ -60,6 +61,7 @@ const listOfSeller = () => {
               <th className="py-2 px-4 border-b"> lastName </th>
               <th className="py-2 px-4 border-b">address</th>
               <th className="py-2 px-4 border-b">email</th>
+              <th className="py-2 px-4 border-b"></th>
               <th className="py-2 px-4 border-b"></th>
               <th className="py-2 px-4 border-b"></th>
 

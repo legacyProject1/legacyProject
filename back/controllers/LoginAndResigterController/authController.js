@@ -42,7 +42,9 @@ const generateToken = (id, firstName) => {
 const registerUser = async (req, res) => {
 
   const { firstName, lastName, email, password, role } = req.body;
-
+if(password.length<8 || (!password.includes("@") &&!password.includes("#")&&!password.includes("?")) ){
+  return res.status(400).json({err:"password is weak!"})
+}
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 

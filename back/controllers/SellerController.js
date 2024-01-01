@@ -10,9 +10,6 @@ const getAll = (req, res) => {
   res.status(500).send(err)
  })
 };
-
-
-
 const oneProduct = (req, res) => {
   Product.findOne({where:{id:req.params.id}})
   .then((result)=>{

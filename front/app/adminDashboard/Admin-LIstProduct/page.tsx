@@ -24,8 +24,9 @@ const listOfProduct = () => {
     .then(r=>console.log('deleted')).catch(err=>console.log(err))
    }
   useEffect(() => {
+    const token=localStorage.getItem('token')
     axios
-      .get('http://localhost:3000/client/getAllProduct')
+      .get('http://localhost:3000/admin/getAllProducts',{headers:{Authorization:`Bearer ${token}`}})
       .then((res) => {
         const Data: ProductProps[] = res.data;
         setData(Data);
